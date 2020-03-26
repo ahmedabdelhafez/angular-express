@@ -1,0 +1,40 @@
+@import "./mixin/all-mixin";
+@import "./bg";
+@import "./colors";
+@import "./layout";
+@import "./variables";
+@import "./flex";
+@import "./grid";
+@import "./forms";
+@import "./tables";
+@import "./buttons";
+@import "./text";
+
+/*****************
+-- start coding
+******************
+*/
+.mycolor {
+  background-color: lightcoral;
+  color: $darkBlue;
+  padding: 5px;
+  font-family: cairo-bold;
+  border-radius: 10px;
+  border: 1px solid palevioletred;
+  outline: none;
+}
+
+.f1 {
+  font-size: 18px;
+  font-family: rlway;
+  color: $light-green;
+  @include border(2px);
+  @include padding(10px, 0px, 10px, 0px);
+  @include text-shadow;
+  @include center-block;
+}
+.f2 {
+  font-size: 18px;
+  font-family: bodoni;
+  color: $light-green;
+}

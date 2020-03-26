@@ -1,0 +1,143 @@
+
+
+/* center item verticaly on the screen*/
+@mixin vertical-center {
+  position: relative;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+@mixin center-vertically {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  @include prefix(transform, translate(-50%, -50%), "webkit" "ms");
+}
+
+/*
+CSS Opacity with fallback for IE8+.
+*/
+
+@mixin opacity($opacity) {
+  opacity: $opacity;
+  $opacity-ie: $opacity * 100;
+  filter: alpha(opacity = $opacity-ie); //IE8
+}
+
+/* 
+center any block 
+*/
+
+@mixin center-block {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* add shadwo to any text*/
+@mixin text-shadow(
+  $x1: 2px,
+  $y1: 2px,
+  $blur1: 5px,
+  $color1: black,
+  $x2: null,
+  $y2: null,
+  $blur2: null,
+  $color2: null
+) {
+  @if ($x2) {
+    text-shadow: $x1 $y1 $blur1 $color1, $x2 $y2 $blur2 $color2;
+  } @else {
+    text-shadow: $x1 $y1 $blur1 $color1;
+  }
+}
+
+/*
+truncate the text if it is long than the width or height of the box
+*/
+@mixin truncate-text($overflow: ellipsis) {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: $overflow; // values are: clip, ellipsis, or a string
+}
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/* 
+absoultue position with its property [top, right, bottom, left]
+
+*/
+@mixin abs-position ($top, $right, $bottom, $left) {
+  position: absolute; 
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+}
+
+@mixin position($position, $args) {
+  @each $o in top right bottom left {
+    $i: index($args, $o);
+    @if $i and $i + 1 <= length($args) and type-of(nth($args, $i + 1)) == number {
+      #{$o}: nth($args, $i + 1);
+    }
+  }
+  position: $position;
+}
+
+// Positioning helpers
+@mixin absolute($args: '') {
+  @include position(absolute, $args);
+}
+
+@mixin fixed($args: '') {
+  @include position(fixed, $args);
+}
+
+@mixin relative($args: '') {
+  @include position(relative, $args);
+}
+
+/*
+ this mixin is used to add the border for any element
+ that allow to make border like: div , input
+ */
+
+ @mixin border(
+    $border-size: 1px,
+    $border-pattern: solid,
+    $border-color: black,
+    $border-position: all,
+    $border-clear: none ) {
+  @if $border-position == all {
+    border: $border-size $border-pattern $border-color;
+  }
+  @else {
+    border-#{$border-position}: $border-size
+    $border-pattern $border-color;
+  }
+  @if $border-clear == none {
+    $border-position: all;
+  }
+  @else {
+    border-#{$border-clear}: none;
+  }
+}
+
+//Padding mixin
+@mixin padding($top:0, $right:0, $bottom:0, $left:0) {
+  padding-top: $top;
+  padding-right: $right;
+  padding-bottom: $bottom;
+  padding-left: $left;
+}
+//Margin mixin
+@mixin margin($top, $right, $bottom, $left) {
+  margin-top: $top;
+  margin-right: $right;
+  margin-bottom: $bottom;
+  margin-left: $left;
+}

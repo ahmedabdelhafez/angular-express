@@ -1,0 +1,18 @@
+.full-spinner {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: darkseagreen;
+
+  &:has(h1) {
+    flex: 1;
+    color: darken(darksalmon, 7);
+    font-size: 24px;
+  }
+}

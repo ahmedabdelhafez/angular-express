@@ -1,0 +1,56 @@
+{
+  "hello": "Welcome Man",
+  "companyname": "Test website",
+  "language": "Language",
+  "name": "Name",
+  "validation": {
+    "required": "required filed fill it please",
+    "rangelength": "please enter data between the range",
+    "maxlength": "pass the max length",
+    "minlength": "the minimum length of data is",
+    "max": "you pass the max value for this item",
+    "min": "enter the min value for this item",
+    "pattern": "please enter data in a valid pattern",
+    "email": "invalid email value",
+    "range": "invalid range fill data in the range",
+    "digits": "please enter number value only",
+    "creditcard": "please enter a valid credit card number",
+    "phone": "please enter a valid phone for your locale",
+    "unknownerror": "unknown error please contact with technical support"
+  },
+  "menudata": {
+    "CAI": "cairo",
+    "ROM": "Roma",
+    "LON": "London",
+    "PAR": "Paris",
+    "IST": "Istanbul"
+  },
+  "statuscode": {
+    "200": "The request has succeeded",
+    "201": "resource created succefuly",
+    "400": "bad request please try again",
+    "401": "please add the auth key or login",
+    "402": "bad request please try again",
+    "403": "please authorize the request",
+    "404": "page not found sorry"
+  },
+  "url-translate": {
+    "home": "home",
+    "teststyle": "test",
+    "testprint": "print",
+    "aboutus": "aboutus",
+    "fullmenu": "fill menu",
+    "moreabout": "More Info"
+  },
+  "navbar": {
+    "home": "Home",
+    "teststyle": "Test Style",
+    "testprint": "Test Print",
+    "aboutus": "Aboutus",
+    "fullmenu": "Full Menu",
+    "moreabout": "More Aboutus",
+    "observable": "Realtime Data",
+    "profile": "Profile",
+    "grid":"Grid CSS3"
+  }
+}

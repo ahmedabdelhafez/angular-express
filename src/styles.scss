@@ -1,0 +1,47 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+//@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import "~@ng-select/ng-select/themes/material.theme.css";
+// angular flatpicker theme
+@import "../node_modules/flatpickr/dist/flatpickr.min.css";
+@import "~ag-grid-community/dist/styles/ag-grid.css";
+@import "~ag-grid-community/dist/styles/ag-theme-balham.css";
+// aos -- animate on scroll style
+@import "~aos/dist/aos.css";
+// owel carousel library
+@import "~ngx-owl-carousel-o/lib/styles/scss/owl.carousel";
+@import "~ngx-owl-carousel-o/lib/styles/scss/owl.theme.default";
+//
+@import "~hover.css/css/hover.css";
+// angular calendar
+@import "../node_modules/angular-calendar/css/angular-calendar.css";
+
+// our custom style
+@import "./assets/scss/custom.scss";
+
+// @font-face {
+//   font-family: 'myfonts';
+//   src: url('./assets/fonts/bodoni/Bodoni-Bold.ttf');
+// }
+
+// @font-face {
+//   font-family: 'rlway';
+//   src: url('./assets/fonts/raleway/Raleway-Medium.ttf');
+// }
+
+// .f1 {
+//   font-size: 18px;
+//   font-family: rlway;
+//   color: green;
+// }
+
+* {
+  box-sizing: border-box;
+  font-family: cairo;
+}
+
+.rtl-item {
+  direction: rtl;
+  text-align: right;
+}

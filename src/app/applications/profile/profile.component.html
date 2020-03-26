@@ -1,0 +1,148 @@
+<div class="jumbotron jumbotron-fluid bg-info height-all">
+  <div class="container justify-content-center align-items-center">
+    <h1 class="display-3  text-warning" [@fadeIn]="fadeInAnimation">Ahmed Abdelhafez Profile</h1>
+    <p class="lead " [@slideInLeft]="slideInLeftAnim">Front End Developer & Full Stack Developer</p>
+    <hr class="my-2">
+    <button type="button" class="btn btn-primary ">More info</button>
+  </div>
+</div>
+
+<!-- container row -->
+<div class="row no-gutters">
+  <div class="col-9 bg-info">
+    <div class="pl-2 pr-2 pt-2 pb-2">
+      <h3 class="h3">My Professional Skills:</h3>
+      <span>
+        HTML
+        <div class="progress">
+          <div class="progress-bar bg-warning" role="progressbar" style="width: 75%;" aria-valuenow="75"
+            aria-valuemin="0" aria-valuemax="100">75%</div>
+        </div>
+      </span>
+      <span>
+        CSS3
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" style="width: 80%;" aria-valuenow="80" aria-valuemin="0"
+            aria-valuemax="100">80%</div>
+        </div>
+      </span>
+
+      <span>
+        Javascript
+        <div class="progress">
+          <div class="progress-bar bg-danger" role="progressbar" style="width: 90%;" aria-valuenow="90"
+            aria-valuemin="0" aria-valuemax="100">90%</div>
+        </div>
+      </span>
+    </div>
+  </div>
+  <div class="col-3 bg-warning">
+    <!-- <p class="lead">first of tha main col</p> -->
+    <div class="div1">
+      <img [src]="'../../../assets/images/slider/1.jpg'" width="128" height="128" class="img-st">
+      <h4 class="h4">Ahmed Abdelhafez</h4>
+      <p class="lead text-center text-wrap pl-1 pr-1">Software Developer && Full stack too</p>
+      <ul class="mainlist">
+        <li class="list-itemm">
+          <p>Service</p>
+        </li>
+        <li class="list-itemm">
+          <p>Products</p>
+        </li>
+        <li class="list-itemm">
+          <p>Contact</p>
+        </li>
+        <li class="list-itemm">
+          <p>Aboutus</p>
+        </li>
+      </ul>
+    </div>
+    <p class="lead">how are you ahmed good luck</p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    <form [formGroup]="myform" (ngSubmit)="saveForm()">
+      <div class="form-group">
+        <label for="fname">first name</label>
+        <input type="text" class="form-control" name="fname" id="fname" placeholder="first name"
+          formControlName="fname">
+      </div>
+      <div class="form-group">
+        <label for="lname">last name</label>
+        <input type="text" class="form-control" name="lname" id="lname" placeholder="last name" formControlName="lname">
+      </div>
+      <div class="form-group">
+        <label for="salary">salary</label>
+        <input type="number" class="form-control" name="salary" id="salary" placeholder="salary"
+          formControlName="salary">
+      </div>
+      <div class="form-group">
+        <label for="comm">comm</label>
+        <input type="number" class="form-control" name="comm" id="comm" placeholder="comm" formControlName="comm">
+      </div>
+      <p class="lead text-danger" *ngIf="myform.get('comm').hasError('required')">comm is requireed if salary greater
+        thank 10000$
+      </p>
+      <mat-checkbox formControlName="status">Status</mat-checkbox> <br>
+      <ng-select [items]="city" formControlName="city" [bindLabel]="city" [bindValue]="city" [searchable]="true"
+        [maxSelectedItems]="2" [addTag]="false" [selectableGroup]="true" [virtualScroll]="true"
+        [placeholder]="'select your fav city'" [multiple]="true">
+      </ng-select>
+      <div class="form-group">
+        <label for="Age">age</label>
+        <input type="text" class="form-control" name="age" id="age" placeholder="age" formControlName="age"
+          (change)="onkeyAction(myform.get('age'))">
+      </div>
+      <div *ngIf="myform.get('age').invalid && (myform.get('age').touched || myform.get('age').dirty)">
+        <p class="lead" *ngIf="myform.get('age').hasError('notInRange')">Age must between min age:
+          {{myform.get('age').errors['message'].min}} and max age {{myform.get('age').errors['message'].max}}
+        </p>
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="myform.invalid">Save</button>
+    </form>
+  </div>
+</div>
+
+<div id="flexdivs" class="row-style" fxLayout="row wrap" fxLayoutAlign="center center" fxLayout.lt-md="column wrap"
+  fxLayoutAlign.lt-md="center stretch">
+
+  <mat-card fxFlex="calc(50% - 20 + 5)" [ngStyle]="{'margin':'10px 10px'}">
+    <mat-card-header [ngStyle]="{'background-color': 'orange'}">
+      <mat-card-title>Football Player are good</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p class="lead">this is the first card contend dta thanks for visisyt us</p>
+    </mat-card-content>
+  </mat-card>
+  <mat-card fxFlex="calc(50% - 25)" [ngStyle]="{'margin':'10px 10px'}">
+    <mat-card-header [ngStyle]="{'background-color': 'orange'}">
+      <mat-card-title>Tennis Player are good</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p class="lead">this is the first card contend dta thanks for visisyt us</p>
+    </mat-card-content>
+  </mat-card>
+  <mat-card fxFlex="calc(50% - 25)" [ngStyle]="{'margin':'10px 10px'}">
+    <!-- <mat-card-header [ngStyle]="{'background-color': 'orange'}">
+      <mat-card-title>Swimming Player are good</mat-card-title>
+    </mat-card-header> -->
+    <mat-card-content>
+      <p class="lead">this is the first card contend dta thanks for visisyt us</p>
+    </mat-card-content>
+  </mat-card>
+  <mat-card fxFlex="calc(50% - 25)" [ngStyle]="{'margin':'10px 10px'}">
+    <!-- <mat-card-header [ngStyle]="{'background-color': 'orange'}">
+      <mat-card-title>Swimming Player are good</mat-card-title>
+    </mat-card-header> -->
+    <mat-card-content>
+      <button mat-icon-button >
+        <mat-icon>home</mat-icon>
+      </button>
+      <p class="lead" >this is the first card contend dta thanks for visisyt us</p>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- <span class="cdk-visually-hidden" fxHide fxShow.lt-md="true"></span> -->
+</div>

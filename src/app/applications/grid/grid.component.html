@@ -1,0 +1,141 @@
+<div class="row">
+  <div class="col">
+    <p class="mycolor">
+      {{dd}}
+    </p>
+    <br>
+    <h2 class="text-danger"> {{timeDiff}} </h2>
+  </div>
+</div>
+<div class="row ">
+  <div class="col">
+
+    <div class="card-group">
+      <div class="card">
+        <div class="card-header">
+          <button type="button" class="btn btn-primary " (click)="startIntro()">Intro</button>
+          <button type="button" class="btn btn-primary dt1" data-intro="'hello section 1'" data-step="1">Video</button>
+          <button type="button" class="btn btn-danger dt1" data-intro="'you can listin to audio too'"
+            data-step="2">Audio</button>
+        </div>
+        <div class="card-body">
+          <h4 class="card-title dt1">Football Matches</h4>
+          <p class="card-text">football is the most popular game in the world you can play at any where</p>
+        </div>
+        <div class="card-footer">
+          <div class="btn-group">
+            <button type="button" class="btn btn-warning dt1">Show Matches</button>
+            <button type="button" class="btn btn-danger dt1">Next Match</button>
+            <button type="button" class="btn btn-info">Details</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <button type="button" class="btn btn-primary " (click)="startIntro()">Intro</button>
+          <button type="button" class="btn btn-primary dt1" data-intro="'hello section 1'" data-step="1">Video</button>
+          <button type="button" class="btn btn-danger dt1" data-intro="'you can listin to audio too'"
+            data-step="2">Audio</button>
+        </div>
+        <div class="card-body">
+
+          <h4 class="card-title dt1">Basketball Matches</h4>
+          <p class="card-text">basketball is the most popular game in the world you can play at any where</p>
+        </div>
+        <div class="card-footer">
+          <div class="btn-group">
+            <button type="button" class="btn btn-warning dt1">Show Matches</button>
+            <button type="button" class="btn btn-danger dt1">Next Match</button>
+            <button type="button" class="btn btn-info">Details</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <form [formGroup]="myform" (ngSubmit)="onSave()">
+
+
+      <div class="form-group">
+        <label for="firstName">firstName</label>
+        <input type="text" class="form-control" name="firstName" id="firstName" placeholder="firstName"
+          formControlName="firstName">
+        <div
+          *ngIf="myform.get('firstName').invalid && (myform.get('firstName').touched || myform.get('firstName').dirty)">
+          <p class="lead" *ngIf="myform.get('firstName').hasError('required')">first name must be enterd </p>
+          <p class="lead" *ngIf="myform.get('firstName').hasError('invalidArabic')">first name must be arabic chars</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input type="text" class="form-control" name="phone" id="phone" placeholder="Phone Number"
+          formControlName="phone">
+        <div *ngIf="myform.get('phone').invalid && (myform.get('phone').touched || myform.get('phone').dirty)">
+          <p class="lead" *ngIf="myform.get('phone').hasError('required')">phone number is required </p>
+          <p class="lead" *ngIf="myform.get('phone').hasError('invalidMobile')">enter a valid mobile phone for your
+            region</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="birthDate">birth date</label>
+        <input type="text" class="form-control" name="birthDate" id="birthDate" placeholder="birth date"
+          formControlName="birthDate">
+        <div
+          *ngIf="myform.get('birthDate').invalid && (myform.get('birthDate').touched || myform.get('birthDate').dirty)">
+          <p class="lead" *ngIf="myform.get('birthDate').hasError('required')">birth date is required </p>
+          <p class="lead" *ngIf="myform.get('birthDate').hasError('invalidDate')">pleae enter a valid date
+            {{ myform.get('birthDate').errors['msg']}} </p>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="salary">salary</label>
+        <input type="text" class="form-control" name="salary" id="salary" placeholder="salary" formControlName="salary">
+        <div *ngIf="myform.get('salary').invalid && (myform.get('salary').touched || myform.get('salary').dirty)">
+          <p class="lead" *ngIf="myform.get('salary').hasError('required')">salary field is required man </p>
+          <p class="lead" *ngIf="myform.get('salary').hasError('invalidNumber')">pleae enter a valid number for salary
+          </p>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="myform.invalid || myform.pending">Save</button>
+    </form>
+    <br />
+
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <circle-progress [percent]="20" [radius]="70" [outerStrokeWidth]="5" [innerStrokeWidth]="6"
+      [outerStrokeColor]="'#ff0080'" [innerStrokeColor]="'#8080c0'" [animation]="true" [animationDuration]="700"
+      [outerStrokeLinecap]="'round'">
+    </circle-progress>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    <!-- <span class="custom-dropdown dropdown-big">
+      <select>
+        <option *ngFor="let item of city; let i=index">{{item}}</option>
+      </select>
+    </span> -->
+    <br>
+
+    <div class="radio-wrap">
+      <div class="radio-options">
+        <input name="option" type="radio" id="click" class="hide" checked>
+        <label for="click">Click Me</label>
+      </div>
+      <div class="radio-options">
+        <input name="option" type="radio" id="touch" class="hide">
+        <label for="touch">Touch Me</label>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-4 bg-danger">
+    <input type="text" name="n1" id="n1" class="my-input" placeholder="first name">
+  </div>
+</div>

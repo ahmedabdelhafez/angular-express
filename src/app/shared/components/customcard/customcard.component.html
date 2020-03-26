@@ -1,0 +1,21 @@
+<mat-card>
+  <mat-card-header [ngStyle]="{'background-color': 'coral','border-radius':'5px' , 'width':'100%'}">
+    <mat-card-title>{{cardTitle}}</mat-card-title>
+    <mat-card-subtitle *ngIf="cardSubtitle != null || cardSubtitle != ''">{{cardSubtitle}}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <ng-content select=".cardContent"></ng-content>
+  </mat-card-content>
+  <mat-card-footer fxLayout="row wrap" fxLayoutAlign="space-between center"
+    [ngStyle]="{'background-color': 'coral','padding':'4px 4px'}">
+    <button mat-fab>
+      <mat-icon>home</mat-icon>
+    </button>
+    <button mat-fab [ngStyle]="{'margin-left': 'auto'}">
+      <mat-icon>search</mat-icon>
+    </button>
+    <button mat-fab [ngStyle]="{'background-color': 'black'}">
+      <mat-icon>edit</mat-icon>
+    </button>
+  </mat-card-footer>
+</mat-card>

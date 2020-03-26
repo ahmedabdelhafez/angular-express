@@ -1,0 +1,20 @@
+body {
+  scroll-behavior: smooth;
+}
+
+h2 {
+  font-size: 6em;
+}
+
+.radio-wrap{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+
+  @media (max-width:750px){
+    flex-direction: column;
+    justify-content: center;
+    align-items: baseline;
+  }
+}

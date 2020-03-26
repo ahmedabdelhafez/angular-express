@@ -1,0 +1,27 @@
+/*
+If you want a consistent look across different screen sizes you will find this aspect ratio mixin useful.
+It maintains the aspect ratio at any screen size. 
+To use this mixin, you need two HTML elements: an outer and an inner one.
+The mixin calculates the aspect ratio of the two elements and maintains that at any resolution.
+*/
+@mixin aspect-ratio($width, $height) {
+    position: relative;
+    &:before {
+       display: block;
+       content: "";
+       width: 100%;
+       padding-top: ($height / $width) * 100%;
+    }
+    > .inner-box {
+       position: absolute;
+       top: 0;
+       left: 0;
+       right: 0;
+       bottom: 0;
+    }
+ }
+
+ 
+
+
+ 

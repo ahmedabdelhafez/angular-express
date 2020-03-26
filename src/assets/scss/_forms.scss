@@ -1,0 +1,15 @@
+/*
+this file is used to ovveride the global style for bootstrap item and material items
+*/
+.form-control {
+  background-color: lightyellow;
+  width: 100%;
+}
+
+
+.my-input{
+    background-color: lightblue;
+    width: 100%;
+    outline: none;
+    border: 1px solid ;
+}
