@@ -1,7 +1,18 @@
 <div class="row">
   <div class="col">
-    <div fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutGap="10px" fxLayout.lt-md="column">
-      <mat-card fxFlex="1 0 auto" fxFlex.lt-md="0 0 100%" fxFlexAlign.lt-md="center" fxFlexOffset="8px;">
+    <div
+      fxLayout="row wrap"
+      fxLayoutAlign="center center"
+      fxLayoutGap="10px"
+      fxLayout.lt-md="column"
+    >
+      <mat-card
+        fxFlex="1 0 auto"
+        fxFlex.lt-md="0 0 100%"
+        fxFlexAlign.lt-md="center"
+        fxFlexOffset="8px;"
+        [ngStyle]="{ backgroundColor: 'orange' }"
+      >
         <mat-card-header>
           <mat-card-title>Football Players News</mat-card-title>
           <mat-card-subtitle>subtitle</mat-card-subtitle>
@@ -11,19 +22,36 @@
             how are you player i hope you are ok thanks to visit us
           </p>
         </mat-card-content>
-        <mat-card-actions fxLayout="row wrap" fxLayoutGap="10px" fxLayoutAlign="center center"
-          fxLayoutAlign.lt-md="center" fxLayout.lt-md="column">
-          <button mat-button [ngStyle]="{ 'background-color': '#c0c0c0', color: 'red' }" fxFlex="1 0 auto">
+        <mat-card-actions
+          fxLayout="row wrap"
+          fxLayoutGap="10px"
+          fxLayoutAlign="center center"
+          fxLayoutAlign.lt-md="center"
+          fxLayout.lt-md="column"
+        >
+          <button
+            mat-button
+            [ngStyle]="{ 'background-color': '#c0c0c0', color: 'red' }"
+            fxFlex="1 0 auto"
+          >
             Subscribe
           </button>
           <button mat-button fxFlex="1 0 auto">Save</button>
-          <button mat-button [ngStyle]="{ 'background-color': '#c0c0c4', color: 'orange' }" fxFlex="1 0 auto">
+          <button
+            mat-button
+            [ngStyle]="{ 'background-color': '#c0c0c4', color: 'orange' }"
+            fxFlex="1 0 auto"
+          >
             Register
           </button>
         </mat-card-actions>
       </mat-card>
       <!-- card 2-->
-      <mat-card fxFlex="1 0 100%" fxFlex.lt-md="0 0 100%" fxFlexAlign.lt-md="center">
+      <mat-card
+        fxFlex="1 0 100%"
+        fxFlex.lt-md="0 0 100%"
+        fxFlexAlign.lt-md="center"
+      >
         <mat-card-header>
           <mat-card-title>Basketball Players News</mat-card-title>
           <mat-card-subtitle>some news</mat-card-subtitle>
@@ -38,7 +66,12 @@
         </mat-card-actions>
       </mat-card>
       <!-- card 3 -->
-      <mat-card class="mt-2" fxFlex="1 0 auto" fxFlex.lt-md="0 0 100%" fxFlexAlign.lt-md="center center">
+      <mat-card
+        class="mt-2"
+        fxFlex="1 0 auto"
+        fxFlex.lt-md="0 0 100%"
+        fxFlexAlign.lt-md="center center"
+      >
         <mat-card-header>
           <mat-card-title>Football Players News</mat-card-title>
           <mat-card-subtitle>subtitle</mat-card-subtitle>
@@ -54,19 +87,5 @@
       </mat-card>
       <span class="cdk-visually-hidden">gfdgfdg</span>
     </div>
-
-  </div>
-</div>
-<!-- circle bar -->
-
-<div class="row">
-  <div class="col">
-    <!-- <button type="button" class="btn btn-primary" (click)="checkAll()">Check All</button> -->
-    <ng-container *ngFor="let item of mainArr">
-      <div>
-        <mat-checkbox [(ngModel)]="item.status" (change)="onChange($event)" [required]="true">{{ item.name }}
-        </mat-checkbox>
-      </div>
-    </ng-container>
   </div>
 </div>
