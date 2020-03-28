@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="col-6 offset-3">
+    <div class="form-group">
+      <label for="msg">Message</label>
+      <input
+        #chatVal
+        type="text"
+        class="form-control"
+        name="msg"
+        id="msg"
+        placeholder="your message"
+        [(ngModel)]="messageModel"
+        (keyup)="onUserWrite(chatVal.value)"
+      />
+    </div>
+    <button
+      type="button"
+      class="btn btn-primary"
+      [disabled]="!messageModel"
+      (click)="sendMessage()"
+    >
+      Send Message
+    </button>
+    <button type="button" class="btn btn-danger" (click)="closeConnection()">
+      Close Connection
+    </button>
+  </div>
+</div>
+
+<ng-container *ngIf="chatVal.value">
+  <div class="lds-ellipsis">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+</ng-container>

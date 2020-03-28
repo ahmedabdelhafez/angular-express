@@ -40,7 +40,8 @@
     "testprint": "print",
     "aboutus": "aboutus",
     "fullmenu": "fill menu",
-    "moreabout": "More Info"
+    "moreabout": "More Info",
+    "chat": "Chat"
   },
   "navbar": {
     "home": "Home",
@@ -51,6 +52,7 @@
     "moreabout": "More Aboutus",
     "observable": "Realtime Data",
     "profile": "Profile",
+    "chat": "Chat",
     "grid":"Grid CSS3"
   }
 }

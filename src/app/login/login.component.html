@@ -74,21 +74,54 @@
       <!-- <div class="login-header">
               <h4 class="h4 text-light">Login</h4>
             </div> -->
-      <img [src]="'../../../assets/icons/navbar-icons/camera-outline.png'" alt="" width="64" height="64">
+      <img
+        [src]="'../../../assets/icons/navbar-icons/camera-outline.png'"
+        alt=""
+        width="64"
+        height="64"
+      />
     </div>
     <div class="main-body">
-      <mat-form-field [ngStyle]="{'width': '100%'}">
+      <mat-form-field [ngStyle]="{ width: '100%' }">
         <mat-label>Username</mat-label>
-        <input matInput placeholder="username" type="text" autocomplete="off" name="username" id="username" autofocus>
+        <input
+          matInput
+          placeholder="username"
+          type="text"
+          autocomplete="off"
+          name="username"
+          id="username"
+          autofocus
+        />
       </mat-form-field>
-      <mat-form-field [ngStyle]="{'width': '100%'}">
+      <mat-form-field [ngStyle]="{ width: '100%' }">
         <mat-label>Password</mat-label>
-        <input matInput placeholder="password" type="password" autocomplete="off" name="password" id="password">
+        <input
+          matInput
+          placeholder="password"
+          type="password"
+          autocomplete="off"
+          name="password"
+          id="password"
+        />
       </mat-form-field>
     </div>
     <div class="action-footer">
-      <button mat-raised-button class="input-item1" [ngStyle]="{'width': '40%'}" (click)="goHome()">Login</button>
-      <button mat-raised-button class="input-item1" [ngStyle]="{'width': '40%'}">Register</button>
+      <button
+        mat-raised-button
+        class="input-item1"
+        [ngStyle]="{ width: '40%' }"
+        (click)="goHome()"
+      >
+        Login
+      </button>
+      <button
+        mat-raised-button
+        class="input-item1"
+        [ngStyle]="{ width: '40%' }"
+      >
+        Register
+      </button>
     </div>
     <div class="icon-footer">
       <i class="fa fa-facebook" aria-hidden="true"></i>
@@ -96,9 +129,7 @@
       <i class="fa fa-google-plus" aria-hidden="true"></i>
     </div>
 
-    <div class="last-footer">
-
-    </div>
+    <div class="last-footer"></div>
   </div>
 </div>
 

@@ -25,6 +25,8 @@ import { LoadingspinnerModule } from "./shared/components/loadingspinner/loading
 import { NgxSpinnerModule } from "ngx-spinner";
 import { ConfigAppService } from "./services/ConfigApp.service";
 import { HttpConfigService } from "./services/httpConfig.service";
+import { ErrorpageComponent } from "./applications/errorpage/errorpage.component";
+// import { SocketSererModule } from "./socket-serer.module";
 
 export function loadConfigurations(configAppService: ConfigAppService) {
   return () => configAppService.getConfig();
@@ -32,9 +34,9 @@ export function loadConfigurations(configAppService: ConfigAppService) {
 @NgModule({
   declarations: [
     AppComponent,
-    // LoginComponent,
     DashboardComponent,
-    HomeComponent
+    HomeComponent,
+    ErrorpageComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +52,8 @@ export function loadConfigurations(configAppService: ConfigAppService) {
       showForeground: true
     }),
     LoadingspinnerModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    // SocketSererModule
   ],
   providers: [
     Title,
