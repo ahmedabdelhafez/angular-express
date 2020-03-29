@@ -2,12 +2,16 @@ const path = require("path");
 import express from "express";
 import http from "http";
 import socketIo from "socket.io";
+import morgan from "morgan";
 import dotenv from "dotenv";
 import cors from "cors";
 import helmet from "helmet";
 import mongoose from "mongoose";
+import bodyparser from "body-parser";
+import passport from "passport";
+import { passportconfig } from "./backend/security/passport";
 import { mainRouter } from "./backend/routes/mainroute";
-
+import { socketEvents } from "./backend/chat_events/socket_events";
 //  < ################################################### > //
 
 dotenv.config();
@@ -25,47 +29,21 @@ mongoose
 
 app.use(cors());
 app.use(helmet());
+app.use(morgan("dev"));
+app.use(bodyparser.json());
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(mainRouter);
 // << create the server for socket io >> //
 const server = http.createServer(app);
 // << socket io instance >> //
 const io = socketIo(server);
-
-
-
+// << use sockwt events module >> //
+socketEvents(io);
 // << load angular app index.html file >> //
 app.use(express.static(__dirname + "/dist"));
 app.get("/*", function(req, res) {
   res.sendFile(path.join(__dirname, "/dist", "index.html"));
-});
-
-/** Create the socket connection */
-const connections = [];
-
-io.sockets.on("connection", socket => {
-  console.log("socket connected well and pushed to array");
-  connections.push(socket);
-  // console.log(connections[0].id);
-
-  // << listin to new message and print it >> //
-  socket.on("new-message", message => {
-    // resend the message to all users include: sender
-    io.emit("message", {
-      message: message,
-      createDate: new Date().toLocaleString()
-    });
-    ////////////// << send to all excepect the sender >> ///
-    // socket.broadcast.emit("message", { message: message });
-    // console.log("new message from client: " + message);
-  });
-
-  socket.on("writing", userText => {
-    socket.broadcast.emit("writing-user-text", userText);
-  });
-
-  socket.on("disconnect", () => {
-    console.log("socket disconnect well");
-  });
 });
 
 // Start the app by listening on the default Heroku port

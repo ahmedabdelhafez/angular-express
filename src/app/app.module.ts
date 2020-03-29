@@ -52,7 +52,8 @@ export function loadConfigurations(configAppService: ConfigAppService) {
       showForeground: true
     }),
     LoadingspinnerModule,
-    NgxSpinnerModule,
+    NgxSpinnerModule
+
     // SocketSererModule
   ],
   providers: [
