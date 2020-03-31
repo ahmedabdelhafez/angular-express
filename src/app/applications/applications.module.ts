@@ -6,15 +6,21 @@ import { OtherModule } from "../shared/other.module";
 import { ComponentModule } from "../shared/components/components.module";
 import { MaterialModule } from "../shared/material.module";
 import { BootstrapngxModule } from "../shared/bootstrapngx.module";
-import { ErrorpageComponent } from "./errorpage/errorpage.component";
 import { ChatComponent } from "./chat/chat.component";
+import { RegisterComponent } from "./register/register.component";
+import { CreatePasswordComponent } from "./create-password/create-password.component";
 
 // const route: Routes = [
 //   { path: '', component: TeststyleComponent }
 // ]
 
 @NgModule({
-  declarations: [TeststyleComponent, ChatComponent],
+  declarations: [
+    TeststyleComponent,
+    ChatComponent,
+    RegisterComponent,
+    CreatePasswordComponent
+  ],
   imports: [
     CommonModule,
     SharedModule,
@@ -23,7 +29,12 @@ import { ChatComponent } from "./chat/chat.component";
     MaterialModule,
     BootstrapngxModule
   ],
-  exports: [TeststyleComponent, ChatComponent],
+  exports: [
+    TeststyleComponent,
+    ChatComponent,
+    RegisterComponent,
+    CreatePasswordComponent
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class ApplicationsModule {}

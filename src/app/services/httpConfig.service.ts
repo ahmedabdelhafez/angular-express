@@ -5,7 +5,7 @@ import { Injectable } from "@angular/core";
 })
 export class HttpConfigService {
   server1 = {
-    server: "http://localhost:5000/",
+    server: "http://localhost:4000/",
     apiUrl: "api/",
     serverWithApiUrl(): string {
       return this.server1.server + this.server1.apiUrl;

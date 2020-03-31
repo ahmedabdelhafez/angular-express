@@ -1,12 +1,13 @@
 import express from "express";
-import bcrypt from "bcryptjs";
+
 import jwt from "jsonwebtoken";
 import passport from "passport";
 import { users } from "../model/usersModel";
 import { createToken } from "../security/jwt_creaetor";
 // << start coding the proggrm >> //
 export const usersRouter = express.Router();
-
+import bcrypt from "bcryptjs";
+import { sendMail } from "../email_config/email_config";
 // << get all users >> //
 
 usersRouter.get("/findall", (req, res) => {
@@ -74,33 +75,62 @@ usersRouter.post("/login", (req, res) => {
 });
 
 // << create a new account for a user >> //
-usersRouter.post("/register", (req, res) => {
-  let { name, email, password, role } = req.body;
+usersRouter.post("/register", async (req, res) => {
+  let { name, email } = req.body;
   // << Save user to database >> //
   var user = new users({
     name: name,
-    email: email,
-    password: password,
-    role: role
+    email: email
   });
 
-  user
-    .save()
-    .then(data => {
-      res.status(200).json({
-        message: "new user created succefully",
-        messageCode: 1,
-        data: data
-      });
-    })
-    .catch(err => {
-      res.status(422).json({
-        message: `some errors while saving user: ${email}`,
-        code: 12415
-      });
+  let newuser = await user.save();
+  if (!newuser) {
+    res.status(400).json({ msg: "an error when creaeting new user" });
+  }
+  let emailState = await sendMail(email);
+  if (emailState) {
+    res.status(200).json({
+      msg: "new user created check tou email please to add password",
+      data: newuser
     });
+  } else {
+    res.status(400).json({ msg: "an error while sending email" });
+  }
 });
+
+//////////////////////////////////////////////////////////////////////////////////////////
 // << update user password  >> //
+
+usersRouter.put("/update", async (req, res) => {
+  let { email, password } = req.body;
+  let user = await users.findOne({ email: { $eq: email } });
+  let hashPassword;
+  // << check if the user in the database or not >> //
+  if (!user) {
+    res.status(404).json({ msg: `User with email: ${email} is not found` });
+  }
+  // << generate salt for password strength >> //
+  let salt = await bcrypt.genSalt(10);
+  // << start hashing the password >> //
+  hashPassword = await bcrypt.hash(password, salt);
+  if (!hashPassword) {
+    res.status(404).json({ msg: `an erro when created password` });
+  }
+
+  // << update user password and send response to UI >> //
+  let updateValue = await users.updateOne(
+    { email: email },
+    { $set: { password: hashPassword } }
+  );
+  if (updateValue) {
+    res.status(200).json({
+      msg: "password created well and user updated",
+      data: updateValue
+    });
+  } else {
+    res.status(400).json({ msg: "an error while updating user password" });
+  }
+});
 
 // << delete user from database [BY: Email] >> //
 usersRouter.delete(

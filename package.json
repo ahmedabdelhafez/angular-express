@@ -7,6 +7,7 @@
     "start:client": "ng serve --proxy-config proxy.conf.json",
     "start:dev": "ng build --prod && nodemon --exec babel-node server.js",
     "start:server": "nodemon --exec babel-node server.js",
+    "start:test": "nodemon --exec babel-node ",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",

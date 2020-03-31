@@ -4,7 +4,10 @@ import { LoginComponent } from "./login/login.component";
 import { TeststyleComponent } from "./applications/teststyle/teststyle.component";
 import { DashboardComponent } from "./applications/dashboard/dashboard.component";
 import { ErrorpageComponent } from "./applications/errorpage/errorpage.component";
-import { ChatComponent } from './applications/chat/chat.component';
+import { ChatComponent } from "./applications/chat/chat.component";
+import { RegisterComponent } from "./applications/register/register.component";
+import { CanactiveateGuard } from "./security/guard/canactiveate.guard";
+import { CreatePasswordComponent } from './applications/create-password/create-password.component';
 
 const routes: Routes = [
   {
@@ -25,7 +28,18 @@ const routes: Routes = [
   {
     path: "chat",
     component: ChatComponent,
+    canActivate: [CanactiveateGuard],
     data: { breadcrumb: "/chat", title: "chat page" }
+  },
+  {
+    path: "register",
+    component: RegisterComponent,
+    data: { breadcrumb: "/register", title: "Register page" }
+  },
+  {
+    path: "create-password",
+    component: CreatePasswordComponent,
+    data: { breadcrumb: "/createpassword", title: "create password" }
   },
   {
     path: "teststyle",

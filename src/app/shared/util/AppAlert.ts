@@ -9,7 +9,7 @@ export class AppAlert {
    *  @returns void
    */
   static showToastError(msg: string, title?: string, timeOut?: number) {
-    Swal.fire({
+    return Swal.fire({
       title: title,
       text: msg,
       toast: true,
@@ -23,7 +23,7 @@ export class AppAlert {
   }
 
   static showToastInfo(msg: string, title?: string, timeOut?: number) {
-    Swal.fire({
+    return Swal.fire({
       title: title,
       text: msg,
       toast: true,
@@ -37,7 +37,7 @@ export class AppAlert {
   }
 
   static showToastSuccess(msg: string, title?: string, timeOut?: number) {
-    Swal.fire({
+    return Swal.fire({
       title: title,
       text: msg,
       toast: true,
@@ -51,7 +51,7 @@ export class AppAlert {
   }
 
   static showToastWarning(msg: string, title?: string, timeOut?: number) {
-    Swal.fire({
+    return Swal.fire({
       title: title,
       text: msg,
       toast: true,
@@ -65,7 +65,7 @@ export class AppAlert {
   }
 
   static showToastQuestion(msg: string, title?: string, timeOut?: number) {
-    Swal.fire({
+    return Swal.fire({
       title: title,
       text: msg,
       toast: true,
@@ -81,7 +81,7 @@ export class AppAlert {
   ////////// << show dialog alerts >> //////////
   //############################################
   static showError(msg: string, title?: string, timeOut?: number) {
-    Swal.fire({
+    return Swal.fire({
       title: title,
       text: msg,
       toast: false,
@@ -93,7 +93,7 @@ export class AppAlert {
   }
 
   static showSuccess(msg: string, title?: string, timeOut?: number) {
-    Swal.fire({
+    return Swal.fire({
       title: title,
       text: msg,
       toast: false,
@@ -105,7 +105,7 @@ export class AppAlert {
   }
 
   static showInfo(msg: string, title?: string, timeOut?: number) {
-    Swal.fire({
+    return Swal.fire({
       title: title,
       text: msg,
       toast: false,
@@ -117,7 +117,7 @@ export class AppAlert {
   }
 
   static showWarning(msg: string, title?: string, timeOut?: number) {
-    Swal.fire({
+    return Swal.fire({
       title: title,
       text: msg,
       toast: false,

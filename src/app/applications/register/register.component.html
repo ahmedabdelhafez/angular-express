@@ -1,0 +1,74 @@
+<form [formGroup]="registerForm" (ngSubmit)="submitData()">
+  <div
+    fxLayout="row wrap"
+    fxLayout.lt-md="column wrap"
+    fxLayoutAlign="center center"
+    fxLayoutGap="5px"
+  >
+    <mat-form-field fxFlex="1 1 calc(50% - 10px)">
+      <input matInput placeholder="username" formControlName="name" />
+      <!-- validate form -->
+      <mat-error
+        *ngIf="
+          registerForm.get('name').invalid &&
+          (registerForm.get('name').touched || registerForm.get('name').dirty)
+        "
+      >
+        <p
+          class="text-danger"
+          *ngIf="registerForm.get('name').hasError('required')"
+        >
+          username field is required
+        </p>
+        <p
+          class="text-danger"
+          *ngIf="registerForm.get('name').hasError('minlength')"
+        >
+          username minlength is 10 charachter
+        </p>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field fxFlex="1 1 calc(50% - 10px)">
+      <input matInput placeholder="email" formControlName="email" />
+      <!-- validate form -->
+      <mat-error
+        [ngStyle]="{ fontSize: '1em' }"
+        *ngIf="
+          registerForm.get('email').invalid &&
+          (registerForm.get('email').touched || registerForm.get('email').dirty)
+        "
+      >
+        <p
+          class="text-danger"
+          *ngIf="registerForm.get('email').hasError('required')"
+        >
+          email field is required
+        </p>
+        <p
+          class="text-danger"
+          *ngIf="registerForm.get('email').hasError('email')"
+        >
+          email not valid
+        </p>
+      </mat-error>
+    </mat-form-field>
+
+    <div
+      fxFlex="1 1 calc(20% - 10px)"
+      [ngStyle]="{ textAlign: 'center', margin:'10px 0px 0px 0px !important' }"
+    >
+      <button
+        type="submit"
+        mat-raised-button
+        class="bg-success mr-2"
+        [disabled]="registerForm.invalid"
+      >
+        Save
+      </button>
+      <button mat-raised-button class="bg-danger" (click)="resetForm()">
+        Reset
+      </button>
+    </div>
+  </div>
+</form>

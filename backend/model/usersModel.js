@@ -7,33 +7,30 @@ const usersSchema = mongoose.Schema({
     required: true,
     unique: true
   },
-  password: {
-    type: String,
-    required: true
-  },
-  role: {
-    type: String
-  }
+  password: { type: String }
 });
 
-usersSchema.pre("save", function(next) {
-  const user = this;
-  // if (!isModified ('user.password')) {
-  //   return next();
-  // }
+// usersSchema.pre("update", function(next) {
+//   const user = this;
+//   // if (!isModified ('user.password')) {
+//   //   return next();
+//   // }
 
-  bcrypt.genSalt(10, (err, salt) => {
-    if (err) {
-      return next(err);
-    }
-    bcrypt.hash(user.password, salt, (err, hash) => {
-      if (err) {
-        return next(err);
-      }
-      user.password = hash;
-      next();
-    });
-  });
-});
+//   bcrypt.genSalt(10, async (err, salt) => {
+//     if (err) {
+//       return next(err);
+//     }
+//     await bcrypt.hash(user.password, salt, (err, hash) => {
+//       console.log("after hash");
+//       console.log(hash);
+
+//       if (err) {
+//         return next(err);
+//       }
+//       user.password = hash;
+//       next();
+//     });
+//   });
+// });
 
 export const users = mongoose.model("users", usersSchema);

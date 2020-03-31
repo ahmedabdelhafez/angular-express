@@ -41,7 +41,9 @@
     "aboutus": "aboutus",
     "fullmenu": "fill menu",
     "moreabout": "More Info",
-    "chat": "Chat"
+    "chat": "Chat",
+    "register": "Register",
+    "createpassword": "Create password"
   },
   "navbar": {
     "home": "Home",
@@ -53,6 +55,7 @@
     "observable": "Realtime Data",
     "profile": "Profile",
     "chat": "Chat",
-    "grid":"Grid CSS3"
+    "grid":"Grid CSS3",
+    "register": "Register"
   }
 }
