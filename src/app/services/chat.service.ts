@@ -18,9 +18,33 @@ export class ChatService {
     this.socket.emit("new-message", message);
   }
 
+  /**
+   * @description event that come when any client send a message
+   * @returns void
+   */
   public getMessages() {
     return Observable.create(observer => {
-      this.socket.on("message", msg => {
+      this.socket.on("client-message", msg => {
+        observer.next(msg);
+      });
+    });
+  }
+
+  /**
+   * @description event that come when any client susscfuly connected to our server
+   * @returns void
+   */
+  public afterConnect() {
+    return Observable.create(observer => {
+      this.socket.on("after-connect", msg => {
+        observer.next(msg);
+      });
+    });
+  }
+
+  public afterDisconnect() {
+    return Observable.create(observer => {
+      this.socket.on("after-disconnect", msg => {
         observer.next(msg);
       });
     });

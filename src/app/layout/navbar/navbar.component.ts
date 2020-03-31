@@ -31,10 +31,10 @@ export class NavbarComponent implements OnInit {
     ////////////////////////////////////////////////////////////////////////////
     this.configAppService
       .getConfig()
-      .then(data => {
-        console.log("App Init well thanks");
-        console.log(data);
-        this.appConfig = data;
+      .then(configData => {
+        // console.log("App Init well thanks");
+        // console.log(configData);
+        this.appConfig = configData;
       })
       .catch(error => {
         console.log(error);

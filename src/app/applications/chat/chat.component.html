@@ -1,4 +1,4 @@
-<div class="row">
+<!-- <div class="row">
   <div class="col-6 offset-3">
     <div class="form-group">
       <label for="msg">Message</label>
@@ -25,13 +25,180 @@
       Close Connection
     </button>
   </div>
-</div>
+</div> -->
 
-<ng-container *ngIf="chatVal.value">
+<!-- <ng-container *ngIf="chatVal.value">
   <div class="lds-ellipsis">
     <div></div>
     <div></div>
     <div></div>
     <div></div>
   </div>
-</ng-container>
+</ng-container> -->
+
+<div class="row bootstrap snippets">
+  <div class="col-md-8 offset-md-2">
+    <!-- DIRECT CHAT PRIMARY -->
+    <div class="box box-primary direct-chat direct-chat-primary">
+      <div class="box-header with-border">
+        <h3 class="box-title">Direct Chat</h3>
+
+        <div class="box-tools pull-right">
+          <span
+            data-toggle="tooltip"
+            title=""
+            class="badge bg-light-blue"
+            data-original-title="3 New Messages"
+            >3</span
+          >
+          <button type="button" class="btn btn-box-tool" data-widget="collapse">
+            <i class="fa fa-comment" [ngStyle]="{ fontSize: '16px' }"></i>
+          </button>
+          <!-- 
+          <button
+            type="button"
+            class="btn btn-box-tool"
+            data-toggle="tooltip"
+            title="Contacts"
+            data-widget="chat-pane-toggle"
+          >
+            <i class="fa fa-comments"></i>
+          </button>
+          <button type="button" class="btn btn-box-tool" data-widget="remove">
+            <i class="fa fa-times"></i>
+          </button> -->
+        </div>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+        <!-- Conversations are loaded here -->
+        <div class="direct-chat-messages">
+          <!-- Message. Default to the left -->
+          <ng-container *ngIf="incomeMessages.length > 0">
+            <ng-container
+              *ngFor="let msgItem of incomeMessages; trackBy: msgItem?.socketId"
+            >
+              <!-- <p class="lead">{{ msgItem.message }}</p> -->
+              <div class="direct-chat-msg">
+                <div class="direct-chat-info clearfix">
+                  <span class="direct-chat-name pull-left">{{
+                    msgItem.name
+                  }}</span>
+                  <span class="direct-chat-timestamp pull-right text-danger">{{
+                    msgItem.createDate | date: "dd/MM/yyyy hh:mm:ss"
+                  }}</span>
+                </div>
+                <!-- /.direct-chat-info -->
+                <img
+                  class="direct-chat-img"
+                  src="https://bootdey.com/img/Content/user_1.jpg"
+                  alt="Message User Image"
+                /><!-- /.direct-chat-img -->
+                <div
+                  class="direct-chat-text"
+                  [ngClass]="{
+                    'text-primary': msgItem.socketId === currentsoketId
+                  }"
+                >
+                  {{ msgItem.message }}
+                </div>
+                <!-- /.direct-chat-text -->
+              </div>
+              <!-- other user style-->
+
+              <!-- Message to the right -->
+              <!-- <div class="direct-chat-msg right" *ngIf="msgItem.socketId === currentsoketId">
+                <div class="direct-chat-info clearfix">
+                  <span class="direct-chat-name pull-right">{{msgItem.name}}</span>
+                  <span class="direct-chat-timestamp pull-left"
+                    >{{ msgItem.createDate | date: "dd/MM/yyyy hh:mm:ss"}}</span
+                  >
+                </div>
+
+                <img
+                  class="direct-chat-img"
+                  src="https://bootdey.com/img/Content/user_2.jpg"
+                  alt="Message User Image"
+                />
+                <div class="direct-chat-text"  [ngClass]="{
+                  'text-primary': msgItem.socketId === currentsoketId
+                }">
+                  {{ msgItem.message }}
+                </div>
+              </div> -->
+              <!-- message to right -->
+            </ng-container>
+          </ng-container>
+        </div>
+
+        <!-- Contacts are loaded here -->
+        <div class="direct-chat-contacts">
+          <ul class="contacts-list">
+            <li>
+              <a href="#">
+                <img
+                  class="contacts-list-img"
+                  src="https://bootdey.com/img/Content/user_1.jpg"
+                />
+
+                <div class="contacts-list-info">
+                  <span class="contacts-list-name">
+                    Count Dracula
+                    <small class="contacts-list-date pull-right"
+                      >2/28/2015</small
+                    >
+                  </span>
+                  <span class="contacts-list-msg"
+                    >How have you been? I was...</span
+                  >
+                </div>
+                <!-- /.contacts-list-info -->
+              </a>
+            </li>
+            <!-- End Contact Item -->
+          </ul>
+          <!-- /.contatcts-list -->
+        </div>
+        <!-- /.direct-chat-pane -->
+      </div>
+      <!-- /.box-body -->
+      <div class="box-footer">
+        <div class="input-group">
+          <input
+            type="text"
+            name="message"
+            placeholder="Type Message ..."
+            class="form-control"
+            [(ngModel)]="messageModel"
+            (keyup)="keySendMessage($event)"
+          />
+          <span class="input-group-btn">
+            <button
+              type="submit"
+              class="btn btn-primary btn-flat"
+              [disabled]="!messageModel"
+              (click)="sendMessage()"
+            >
+              Send
+            </button>
+            <button
+              type="submit"
+              class="btn btn-primary btn-flat ml-1 mr-1"
+              (click)="removeOneChar()"
+              [disabled]="!messageModel"
+            >
+              <i class="fa fa-chevron-circle-left" aria-hidden="true"></i>
+            </button>
+          </span>
+        </div>
+      </div>
+      <!-- /.box-footer-->
+    </div>
+    <!--/.direct-chat -->
+  </div>
+</div>
+
+<!-- create room modal -->
+<ng-template #chatRooms>
+  b4-modal
+</ng-template>

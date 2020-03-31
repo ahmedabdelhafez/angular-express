@@ -46,8 +46,8 @@ export class BreadcrumbComponent implements OnInit {
 
     // if there is no childer
     if (children.length === 0) {
-      console.log("all breadcrumbs");
-      console.log(breadcrumbs);
+      // console.log("all breadcrumbs");
+      // console.log(breadcrumbs);
 
       return breadcrumbs;
     }
@@ -66,7 +66,7 @@ export class BreadcrumbComponent implements OnInit {
         // breadcrumbs.push({ label, url });
         breadcrumbs.push(this.getUrlTranslation(url));
       }
-      console.log("Child: " + url);
+      // console.log("Child: " + url);
 
       return this.createBreadcrumbs(child, url, breadcrumbs);
     }
@@ -80,7 +80,7 @@ export class BreadcrumbComponent implements OnInit {
     } else {
       this.urlArr = [];
       this.urlArr = url.split("/");
-      console.log("url arr: " + this.urlArr);
+      // console.log("url arr: " + this.urlArr);
       // remove this first ele,emtn from the array
       this.urlArr.shift();
     }
@@ -107,7 +107,7 @@ export class BreadcrumbComponent implements OnInit {
     } else {
       currUrl = this.translateUrlArr.join(" > ");
     }
-    console.log("Final URL: " + currUrl);
+    // console.log("Final URL: " + currUrl);
     this.currentUrl = currUrl;
     return currUrl;
   }

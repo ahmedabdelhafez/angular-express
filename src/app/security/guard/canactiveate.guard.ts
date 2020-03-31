@@ -21,7 +21,7 @@ export class CanactiveateGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Promise<boolean> {
-    const userToken = JSON.stringify(sessionStorage.getItem("token"));
+    const userToken = sessionStorage.getItem("token");
     // console.log('usertoken value: ' + userToken);
 
     if (!userToken) {

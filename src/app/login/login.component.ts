@@ -37,13 +37,14 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.userSubscription = this.userService.login(userdata).subscribe(
         async data => {
           sessionStorage.setItem("token", data["token"]);
+          sessionStorage.setItem("user", JSON.stringify(data));
           await AppAlert.showSuccess("logged in succefuly", "", 1500);
           await AppAlert.showInfo(
             "you will be redirect to chat room",
             "",
             2000
           );
-          this.router.navigate(['/chat']);
+          this.router.navigate(["/chat"]);
         },
         async (err: HttpErrorResponse) => {
           console.log(err);

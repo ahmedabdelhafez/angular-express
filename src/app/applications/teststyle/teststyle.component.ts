@@ -44,10 +44,5 @@ import { UsersService } from "src/app/services/users.service";
 export class TeststyleComponent implements OnInit {
   constructor(private userService: UsersService) {}
 
-  ngOnInit() {
-    this.userService.getAll().subscribe(data => {
-      console.log("data from express backen");
-      console.log(data);
-    });
-  }
+  ngOnInit() {}
 }
