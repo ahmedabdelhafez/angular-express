@@ -1,9 +1,13 @@
-import { AbstractControl, ValidationErrors, ValidatorFn } from "@angular/forms";
+import {
+  AbstractControl,
+  ValidationErrors,
+  ValidatorFn,
+  FormGroup
+} from "@angular/forms";
 import validator from "validator";
 import { DateUtil } from "../util/DateUtil";
 
 export class CustomValidation {
- 
   /**
    * @description `haveSpaces` check if the value have spaces
    * @param `control` string
@@ -63,26 +67,26 @@ export class CustomValidation {
    * @param `control` string
    * @returns `boolean`
    */
-  static contains(
-    control: AbstractControl,
-    chars: string
-  ): ValidationErrors | null {
-    const val: string = control.value as string;
-    if (validator.contains(val, chars)) {
-      return { contain: true };
-    }
-    return null;
+  static contains(searchText: string): ValidationErrors | null {
+    return (control: AbstractControl): { [key: string]: any } => {
+      const val: string = control.value as string;
+      if (validator.contains(val, searchText)) {
+        return { contain: true, message: { searchText } };
+      }
+      return null;
+    };
   }
 
   /**
-   * @description `ismobilephone` check if the value is a valid mobile used locale is `en-AU` for AUstralia
+   * @description `ismobilephone` check if the value is a valid mobile used locale is `ar-EG` for egypt phones
+   * `Vodafone: 010` , `Etisalat: 011`, `Mobinil: 012` , `We: 015`
    * @param `control` string
    * @returns `boolean`
    */
   static ismobilephone(control: AbstractControl): ValidationErrors | null {
     const val: string = control.value as string;
     if (
-      !validator.isMobilePhone(val === null ? "" : val, "en-AU", {
+      !validator.isMobilePhone(val === null ? "" : val, "ar-EG", {
         strictMode: false
       })
     ) {
@@ -103,7 +107,7 @@ export class CustomValidation {
   static iscurrency(control: AbstractControl): ValidationErrors | null {
     const val: string | number = control.value as string | number;
     if (
-      !validator.isCurrency(val === null  ? "" : val, {
+      !validator.isCurrency(val === null ? "" : val, {
         thousands_separator: "",
         decimal_separator: ".",
         allow_decimal: true,
@@ -135,7 +139,7 @@ export class CustomValidation {
    */
   static isndecimal(control: AbstractControl): ValidationErrors | null {
     const val = control.value as string | number;
-    if (!validator.isDecimal(val, { locale: "en-AU", decimal_digits: "1,2" })) {
+    if (!validator.isDecimal(val, { locale: "en-US", decimal_digits: "1,2" })) {
       return { invalidDecimal: true };
     }
     return null;
@@ -234,12 +238,8 @@ export class CustomValidation {
   /**
      * @description `isDate` method checks if the field value is a valid date
      * and the available date formats 
-     * [ "DD-MM-YYYY",
-        "DD/MM/YYYY",
-        "MM-DD-YYYY",
-        "MM/DD/YYYY",
-        "YYYY-MM-DD",
-        "YYYY/MM/DD"]
+     * [ "DD-MM-YYYY","DD/MM/YYYY","MM-DD-YYYY",
+        "MM/DD/YYYY","YYYY-MM-DD","YYYY/MM/DD"]
      * @param `control` date string
      * @returns `boolean`
      */
@@ -257,14 +257,37 @@ export class CustomValidation {
     }
   }
 
-  static passwordMatchValidator(control: AbstractControl) {
-    const password: string = control.get("password").value; // get password from our password form control
-    const confirmPassword: string = control.get("confirmPassword").value; // get password from our confirmPassword form control
-    // compare is the password math
-    if (password !== confirmPassword) {
-      // if they don't match, set an error in our confirmPassword form control
-      control.get("confirmPassword").setErrors({ NoPassswordMatch: true });
-    }
+  static passwordMatchValidator(
+    passwordField: string
+  ): ValidationErrors | null {
+    return (control: AbstractControl): { [key: string]: any } => {
+      const password: string = passwordField;
+      const confirmPassword: string = control.get("confirmPassword")
+        .value as string; // get password from our confirmPassword form control
+      if (password !== confirmPassword) {
+        // if they don't match, set an error in our confirmPassword form control
+        control.get("confirmPassword").setErrors({ NotMatch: true });
+      } else {
+        return null;
+      }
+    };
   }
 
+  static ConfirmedValidator(controlName: string, matchingControlName: string) {
+    return (formGroup: FormGroup) => {
+      const password = formGroup.get(controlName);
+      const confirmPassword = formGroup.get(matchingControlName);
+      if (
+        confirmPassword.errors &&
+        !confirmPassword.errors.confirmedValidator
+      ) {
+        return;
+      }
+      if (password.value !== confirmPassword.value) {
+        confirmPassword.setErrors({ NotMatch: true });
+      } else {
+        confirmPassword.setErrors(null);
+      }
+    };
+  }
 }

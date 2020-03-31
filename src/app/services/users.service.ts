@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
+import { UserLogin } from "../model/UserLogin.interface";
 
 @Injectable({
   providedIn: "root"
@@ -15,5 +16,15 @@ export class UsersService {
 
   registerUser(data) {
     return this.http.post(`${this.baseUrl}/users/register`, data);
+  }
+
+  login(loginData: UserLogin) {
+    return this.http.post(`${this.baseUrl}/users/login`, loginData);
+  }
+
+  createPassword(passwordData) {
+    return this.http.post(`${this.baseUrl}/users/update`, passwordData, {
+      responseType: "json"
+    });
   }
 }

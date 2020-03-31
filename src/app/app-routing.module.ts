@@ -39,7 +39,7 @@ const routes: Routes = [
   {
     path: "create-password",
     component: CreatePasswordComponent,
-    data: { breadcrumb: "/createpassword", title: "create password" }
+    data: { breadcrumb: "/create-password", title: "create password" }
   },
   {
     path: "teststyle",

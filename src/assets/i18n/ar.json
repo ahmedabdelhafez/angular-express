@@ -43,7 +43,7 @@
     "chat": "دردشة",
     "register": "التسجيل",
     "moreabout": "معلومات اكثر",
-    "createpassword": "إنشاء كلمة المرور"
+    "create-password": "إنشاء كلمة المرور"
   },
   "navbar": {
     "home": "الرئيسية",
@@ -56,6 +56,7 @@
     "profile": "الملف الشخصي",
     "grid": "نظام شبكي",
     "chat": "دردشة",
+    "create-password": "إنشاء كلمة المرور",
     "register": "التسجيل"
   }
 }

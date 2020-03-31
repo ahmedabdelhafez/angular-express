@@ -5,7 +5,7 @@ export class AppAlert {
    * `showToastError` show an error toaster
    * @param `msg` String param for message text
    * @param `title` optional: title for toaster
-   * @param `timeOut` optional: the amount of time to close the toaster @default 1000 ms
+   * @param `timeOut` optional: the amount of time to close the toaster @default 1500 ms
    *  @returns void
    */
   static showToastError(msg: string, title?: string, timeOut?: number) {
@@ -16,7 +16,7 @@ export class AppAlert {
       position: "center",
       showCancelButton: false,
       showConfirmButton: false,
-      // timer: timeOut === null ? 1000 : timeOut,
+      timer: timeOut ? timeOut : 1500,
       icon: "error",
       showClass: { popup: "animated fadeIn fast" }
     });
@@ -29,8 +29,7 @@ export class AppAlert {
       toast: true,
       position: "center",
       showConfirmButton: false,
-      // type: "info",
-      timer: timeOut === null ? 1000 : timeOut,
+      timer: timeOut ? timeOut : 1500,
       icon: "info",
       showClass: { popup: "animated fadeIn fast" }
     });
@@ -43,8 +42,7 @@ export class AppAlert {
       toast: true,
       position: "center",
       showConfirmButton: false,
-      // type: "success",
-      timer: timeOut === null ? 1000 : timeOut,
+      timer: timeOut ? timeOut : 1500,
       icon: "success",
       showClass: { popup: "animated fadeIn fast" }
     });
@@ -57,8 +55,7 @@ export class AppAlert {
       toast: true,
       position: "center",
       showConfirmButton: false,
-      // type: "warning",
-      timer: timeOut === null ? 1000 : timeOut,
+      timer: timeOut ? timeOut : 1500,
       icon: "warning",
       showClass: { popup: "animated fadeIn fast" }
     });
@@ -71,8 +68,7 @@ export class AppAlert {
       toast: true,
       position: "center",
       showConfirmButton: false,
-      // type: "error",
-      timer: timeOut === null ? 1000 : timeOut,
+      timer: timeOut ? timeOut : 1500,
       icon: "question",
       showClass: { popup: "animated fadeIn fast" }
     });
@@ -88,7 +84,7 @@ export class AppAlert {
       position: "center",
       showConfirmButton: false,
       icon: "error",
-      timer: timeOut === null ? 1000 : timeOut
+      timer: timeOut ? timeOut : 1500
     });
   }
 
@@ -100,7 +96,7 @@ export class AppAlert {
       position: "center",
       showConfirmButton: false,
       icon: "success",
-      timer: timeOut === null ? 1000 : timeOut
+      timer: timeOut ? timeOut : 1500
     });
   }
 
@@ -112,7 +108,7 @@ export class AppAlert {
       position: "center",
       showConfirmButton: false,
       icon: "info",
-      timer: timeOut === null ? 1000 : timeOut
+      timer: timeOut ? timeOut : 1500
     });
   }
 
@@ -124,21 +120,39 @@ export class AppAlert {
       position: "center",
       showConfirmButton: false,
       icon: "warning",
-      timer: timeOut === null ? 1000 : timeOut
+      timer: timeOut ? timeOut : 1500
     });
   }
 
   static showQuestion(msg: string, title?: string, timeOut?: number) {
-    Swal.fire({
-      title: title,
+    return Swal.fire({
       text: msg,
+      title: title,
       toast: false,
       position: "center",
       showConfirmButton: false,
       icon: "question",
-      timer: timeOut === null ? 1000 : timeOut
+      timer: timeOut ? timeOut : 1500
     });
   }
 
   ///////////////////// << Confirm Alert & Dialogs >>
+  static ConfirmALert(
+    msg: string,
+    title?: string,
+    // timeOut?: number,
+    confirmButtonText?: string,
+    cancelButtonText?: string
+  ) {
+    return Swal.fire({
+      text: msg,
+      title: title,
+      position: "center",
+      // timer: timeOut ? timeOut : 1500,
+      showConfirmButton: true,
+      showCancelButton: true,
+      confirmButtonText: confirmButtonText ? confirmButtonText : "Yes",
+      cancelButtonText: cancelButtonText ? cancelButtonText : "No"
+    });
+  }
 }

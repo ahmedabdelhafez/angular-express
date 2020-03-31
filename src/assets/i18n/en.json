@@ -43,7 +43,7 @@
     "moreabout": "More Info",
     "chat": "Chat",
     "register": "Register",
-    "createpassword": "Create password"
+    "create-password": "Create password"
   },
   "navbar": {
     "home": "Home",
@@ -56,6 +56,7 @@
     "profile": "Profile",
     "chat": "Chat",
     "grid":"Grid CSS3",
+    "create-password": "Create password",
     "register": "Register"
   }
 }

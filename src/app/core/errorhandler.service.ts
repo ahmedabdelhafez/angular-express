@@ -26,7 +26,6 @@ export class ErrorhandlerService implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(
-      retry(2),
       catchError((err: HttpErrorResponse) => {
         // << check client side error >> //
         if (err.error instanceof ErrorEvent) {

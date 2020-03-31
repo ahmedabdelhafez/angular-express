@@ -9,6 +9,7 @@ import { BootstrapngxModule } from "../shared/bootstrapngx.module";
 import { ChatComponent } from "./chat/chat.component";
 import { RegisterComponent } from "./register/register.component";
 import { CreatePasswordComponent } from "./create-password/create-password.component";
+import { LoginComponent } from "../login/login.component";
 
 // const route: Routes = [
 //   { path: '', component: TeststyleComponent }
@@ -19,7 +20,8 @@ import { CreatePasswordComponent } from "./create-password/create-password.compo
     TeststyleComponent,
     ChatComponent,
     RegisterComponent,
-    CreatePasswordComponent
+    CreatePasswordComponent,
+    LoginComponent
   ],
   imports: [
     CommonModule,
@@ -33,7 +35,8 @@ import { CreatePasswordComponent } from "./create-password/create-password.compo
     TeststyleComponent,
     ChatComponent,
     RegisterComponent,
-    CreatePasswordComponent
+    CreatePasswordComponent,
+    LoginComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

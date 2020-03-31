@@ -34,44 +34,39 @@ usersRouter.get("/findall", (req, res) => {
 });
 
 // << login to application >> //
-usersRouter.post("/login", (req, res) => {
+usersRouter.post("/login", async (req, res) => {
   // << extract data from request body >>
   const { email, password } = req.body;
 
   // << check if the email is exists or not >>
-  users
-    .findOne({
-      email: email
-    })
-    .then(user => {
-      if (user) {
-        let isPasswordMatch = bcrypt.compareSync(password, user.password);
-        if (isPasswordMatch) {
-          let userToken = createToken({
-            name: user.name,
-            email: user.email
-          });
-          res.status(200).json({
-            data: {
-              name: user.name,
-              email: user.email
-            },
-            token: userToken
-          });
-        } else {
-          res.status(401).json({
-            message: "please check email or password"
-          });
-        }
-      } else {
-        res.status(404).json({
-          message: "no data for this user"
-        });
-      }
-    })
-    .catch(err => {
-      res.status(500).json(err);
+  let user = await users.findOne({ email: email });
+
+  if (user) {
+    let isPasswordMatch = bcrypt.compareSync(password, user.password);
+    if (isPasswordMatch) {
+      let userToken = createToken({
+        name: user.name,
+        email: user.email
+      });
+      return res.status(200).json({
+        data: {
+          name: user.name,
+          email: user.email
+        },
+        token: userToken
+      });
+    } else {
+      return res.status(400).json({
+        message: "please check email or password",
+        code: "EMAIL_PASSWORD"
+      });
+    }
+  } else {
+    return res.status(404).json({
+      message: "no data for this user",
+      code: "NODATA"
     });
+  }
 });
 
 // << create a new account for a user >> //
@@ -89,6 +84,7 @@ usersRouter.post("/register", async (req, res) => {
   }
   let emailState = await sendMail(email);
   if (emailState) {
+    console.log("email send well to user");
     res.status(200).json({
       msg: "new user created check tou email please to add password",
       data: newuser
@@ -101,20 +97,22 @@ usersRouter.post("/register", async (req, res) => {
 //////////////////////////////////////////////////////////////////////////////////////////
 // << update user password  >> //
 
-usersRouter.put("/update", async (req, res) => {
-  let { email, password } = req.body;
-  let user = await users.findOne({ email: { $eq: email } });
+usersRouter.post("/update", async (req, res) => {
+  let { email, password, confirmPassword } = req.body;
+  let user = await users.findOne({ email: email });
   let hashPassword;
   // << check if the user in the database or not >> //
   if (!user) {
-    res.status(404).json({ msg: `User with email: ${email} is not found` });
+    return res
+      .status(404)
+      .json({ msg: `User with email: ${email} is not found` });
   }
   // << generate salt for password strength >> //
   let salt = await bcrypt.genSalt(10);
   // << start hashing the password >> //
   hashPassword = await bcrypt.hash(password, salt);
   if (!hashPassword) {
-    res.status(404).json({ msg: `an erro when created password` });
+    return res.status(404).json({ msg: `an erro when created password` });
   }
 
   // << update user password and send response to UI >> //
@@ -123,12 +121,14 @@ usersRouter.put("/update", async (req, res) => {
     { $set: { password: hashPassword } }
   );
   if (updateValue) {
-    res.status(200).json({
+    return res.status(200).json({
       msg: "password created well and user updated",
       data: updateValue
     });
   } else {
-    res.status(400).json({ msg: "an error while updating user password" });
+    return res
+      .status(400)
+      .json({ msg: "an error while updating user password" });
   }
 });
 
@@ -156,4 +156,6 @@ usersRouter.delete(
         res.json(err).status(404);
       });
   }
+
+  /// << chec email >> //
 );
