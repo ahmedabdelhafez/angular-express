@@ -15,6 +15,7 @@ import { socketEvents } from "./backend/chat_events/socket_events";
 //  < ################################################### > //
 
 dotenv.config();
+
 // << get express instance >> //
 const app = express();
 
@@ -33,6 +34,7 @@ mongoose
 
 app.use(cors());
 app.use(helmet());
+app.disable("x-powered-by");
 app.use(morgan("dev"));
 app.use(bodyparser.json());
 app.use(passport.initialize());
@@ -42,6 +44,7 @@ app.use(mainRouter);
 const server = http.createServer(app);
 // << socket io instance >> //
 const io = socketIo(server);
+http.globalAgent.maxSockets = 2;
 // << use sockwt events module >> //
 socketEvents(io);
 // << load angular app index.html file >> //

@@ -7,7 +7,8 @@ import { ErrorpageComponent } from "./applications/errorpage/errorpage.component
 import { ChatComponent } from "./applications/chat/chat.component";
 import { RegisterComponent } from "./applications/register/register.component";
 import { CanactiveateGuard } from "./security/guard/canactiveate.guard";
-import { CreatePasswordComponent } from './applications/create-password/create-password.component';
+import { ChekRolesGuard } from "./security/guard/chek-roles.guard";
+import { CreatePasswordComponent } from "./applications/create-password/create-password.component";
 
 const routes: Routes = [
   {

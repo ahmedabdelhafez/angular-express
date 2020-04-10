@@ -79,7 +79,7 @@
               *ngFor="let msgItem of incomeMessages; trackBy: msgItem?.socketId"
             >
               <!-- <p class="lead">{{ msgItem.message }}</p> -->
-              <div class="direct-chat-msg">
+              <div class="direct-chat-msg" *ngIf="msgItem.socketId === currentsoketId">
                 <div class="direct-chat-info clearfix">
                   <span class="direct-chat-name pull-left">{{
                     msgItem.name
@@ -97,17 +97,18 @@
                 <div
                   class="direct-chat-text"
                   [ngClass]="{
-                    'text-primary': msgItem.socketId === currentsoketId
+                    'text-danger': msgItem.socketId === currentsoketId
                   }"
                 >
                   {{ msgItem.message }}
                 </div>
                 <!-- /.direct-chat-text -->
               </div>
+
               <!-- other user style-->
 
               <!-- Message to the right -->
-              <!-- <div class="direct-chat-msg right" *ngIf="msgItem.socketId === currentsoketId">
+              <div class="direct-chat-msg right" *ngIf="msgItem.socketId !== currentsoketId">
                 <div class="direct-chat-info clearfix">
                   <span class="direct-chat-name pull-right">{{msgItem.name}}</span>
                   <span class="direct-chat-timestamp pull-left"
@@ -125,7 +126,7 @@
                 }">
                   {{ msgItem.message }}
                 </div>
-              </div> -->
+              </div>
               <!-- message to right -->
             </ng-container>
           </ng-container>
@@ -170,7 +171,8 @@
             placeholder="Type Message ..."
             class="form-control"
             [(ngModel)]="messageModel"
-            (keyup)="keySendMessage($event)"
+            (keypress)="keySendMessage($event)"
+            (keyup)="onUserWrite(messageModel)"
           />
           <span class="input-group-btn">
             <button

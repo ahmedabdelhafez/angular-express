@@ -18,6 +18,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   currDate = new Date();
   timerObs$ = timer(1000, 1000);
   currentsoketId = null;
+  currentUsername = null;
   constructor(private chatService: ChatService) {}
 
   ngOnInit() {
@@ -25,6 +26,9 @@ export class ChatComponent implements OnInit, OnDestroy {
     //   this.currDate = new Date();
     // });
     // << fire after user connected or open chat pag>> //
+    this.currentUsername = JSON.parse(sessionStorage.getItem("user")).data[
+      "name"
+    ];
     this.afterConnectedSubscription = this.chatService.afterConnect().subscribe(
       conn => {
         console.log("after connect status");

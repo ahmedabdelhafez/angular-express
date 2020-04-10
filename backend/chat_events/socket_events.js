@@ -44,6 +44,7 @@ export const socketEvents = io => {
       // console.log("new message from client: " + message);
     });
 
+    // << send event to all connected users when the current user write [expect: currnet user] >> //
     client.on(chatEvents.writing, userText => {
       client.broadcast.emit("writing-user-text", userText);
     });
