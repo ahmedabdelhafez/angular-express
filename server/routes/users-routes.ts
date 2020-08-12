@@ -1,8 +1,8 @@
-import express from "express";
+import * as express from "express";
 
-import jwt from "jsonwebtoken";
-import passport from "passport";
-import { users } from "../model/usersModel";
+import * as jwt from "jsonwebtoken";
+import * as  passport from "passport";
+import { Users } from "../model/usersModel";
 import { createToken } from "../security/jwt_creaetor";
 // << start coding the proggrm >> //
 export const usersRouter = express.Router();
@@ -11,22 +11,21 @@ import { sendMail } from "../email_config/email_config";
 // << get all users >> //
 
 usersRouter.get("/findall", (req, res) => {
-  users
-    .find(
-      {},
-      {
-        _id: 1,
-        name: 1,
-        email: 1
-      }
-    )
-    .then(data => {
+  Users.find(
+    {},
+    {
+      _id: 1,
+      name: 1,
+      email: 1,
+    }
+  )
+    .then((data) => {
       res.json(data).status(200);
     })
-    .catch(err => {
+    .catch((err) => {
       res
         .json({
-          message: "no data here"
+          message: "no data here",
         })
         .status(404);
     });
@@ -38,32 +37,32 @@ usersRouter.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
   // << check if the email is exists or not >>
-  let user = await users.findOne({ email: email });
+  let user = await Users.findOne({ email: email });
 
   if (user) {
     let isPasswordMatch = bcrypt.compareSync(password, user.password);
     if (isPasswordMatch) {
       let userToken = createToken({
         name: user.name,
-        email: user.email
+        email: user.email,
       });
       return res.status(200).json({
         data: {
           name: user.name,
-          email: user.email
+          email: user.email,
         },
-        token: userToken
+        token: userToken,
       });
     } else {
       return res.status(400).json({
         message: "please check email or password",
-        code: "EMAIL_PASSWORD"
+        code: "EMAIL_PASSWORD",
       });
     }
   } else {
     return res.status(404).json({
       message: "no data for this user",
-      code: "NODATA"
+      code: "NODATA",
     });
   }
 });
@@ -72,9 +71,9 @@ usersRouter.post("/login", async (req, res) => {
 usersRouter.post("/register", async (req, res) => {
   let { name, email } = req.body;
   // << Save user to database >> //
-  var user = new users({
+  var user = new Users({
     name: name,
-    email: email
+    email: email,
   });
 
   let newuser = await user.save();
@@ -86,7 +85,7 @@ usersRouter.post("/register", async (req, res) => {
     console.log("email send well to user");
     res.status(200).json({
       msg: "new user created check tou email please to add password",
-      data: newuser
+      data: newuser,
     });
   } else {
     res.status(400).json({ msg: "an error while sending email" });
@@ -98,7 +97,7 @@ usersRouter.post("/register", async (req, res) => {
 
 usersRouter.post("/update", async (req, res) => {
   let { email, password, confirmPassword } = req.body;
-  let user = await users.findOne({ email: email });
+  let user = await Users.findOne({ email: email });
   let hashPassword;
   // << check if the user in the database or not >> //
   if (!user) {
@@ -115,14 +114,14 @@ usersRouter.post("/update", async (req, res) => {
   }
 
   // << update user password and send response to UI >> //
-  let updateValue = await users.updateOne(
+  let updateValue = await Users.updateOne(
     { email: email },
     { $set: { password: hashPassword } }
   );
   if (updateValue) {
     return res.status(200).json({
       msg: "password created well and user updated",
-      data: updateValue
+      data: updateValue,
     });
   } else {
     return res
@@ -135,23 +134,22 @@ usersRouter.post("/update", async (req, res) => {
 usersRouter.delete(
   "/deleteuser",
   passport.authenticate("jwt", {
-    session: false
+    session: false,
   }),
   (req, res) => {
     let email = req.body.email;
-    users
-      .deleteOne({
-        email: email
-      })
-      .then(data => {
+    Users.deleteOne({
+      email: email,
+    })
+      .then((data) => {
         res
           .json({
             message: "user removed well thanks",
-            messageCode: 4
+            messageCode: 4,
           })
           .status(200);
       })
-      .catch(err => {
+      .catch((err) => {
         res.json(err).status(404);
       });
   }

@@ -1,14 +1,16 @@
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
-import { baseTestUrl } from '../assets/config/Config';
+import { baseTestUrl } from "../assets/config/Config";
 export const environment = {
   production: false,
-  config:{
-    prodUrl:'http://localhost:5050',
-    companyName: 'ahmedfezo Teeeeeeest'
-  }
-  
+  config: {
+    prodUrl: "http://localhost:5050",
+    companyName: "ahmedfezo Teeeeeeest",
+  },
+  chatServer: {
+    url: "http://localhost:4000",
+  },
 };
 
 /*

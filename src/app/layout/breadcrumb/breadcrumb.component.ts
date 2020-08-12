@@ -8,7 +8,7 @@ import { filter } from "rxjs/operators";
 @Component({
   selector: "app-breadcrumb",
   templateUrl: "./breadcrumb.component.html",
-  styleUrls: ["./breadcrumb.component.scss"]
+  styleUrls: ["./breadcrumb.component.scss"],
 })
 export class BreadcrumbComponent implements OnInit {
   currentUrl = "";
@@ -30,7 +30,7 @@ export class BreadcrumbComponent implements OnInit {
 
   ngOnInit() {
     this.router.events
-      .pipe(filter(event => event instanceof NavigationEnd))
+      .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe(
         () =>
           (this.menuItems = this.createBreadcrumbs(this.activatedRoute.root))
@@ -54,7 +54,7 @@ export class BreadcrumbComponent implements OnInit {
 
     for (const child of children) {
       const routeURL: string = child.snapshot.url
-        .map(segment => segment.path)
+        .map((segment) => segment.path)
         .join("/");
       if (routeURL !== "") {
         url += `/${routeURL}`;
@@ -84,10 +84,13 @@ export class BreadcrumbComponent implements OnInit {
       // remove this first ele,emtn from the array
       this.urlArr.shift();
     }
-    this.translateUrlArr = this.urlArr.map(ele => {
+    this.urlArr.map(async (ele) => {
       // console.log('current elemnt: ' + ele);
       if (ele === "home" || ele === null || ele === "") {
-        return this.translate.getTranslation("url-translate.home");
+        let trans: string = await this.translate.getTranslation(
+          "url-translate.home"
+        );
+        this.translateUrlArr.push(trans);
       } else {
         // << get the url before the query parameter (?) >> //
         return this.translate.getTranslation(

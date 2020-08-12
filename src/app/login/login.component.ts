@@ -6,17 +6,19 @@ import { Subscription } from "rxjs";
 import { UserLogin } from "../model/UserLogin.interface";
 import { AppAlert } from "../shared/util/AppAlert";
 import { HttpErrorResponse } from "@angular/common/http";
+import { TranslationService } from "../core/translation.service";
 
 @Component({
   selector: "app-login",
   templateUrl: "./login.component.html",
-  styleUrls: ["./login.component.scss"]
+  styleUrls: ["./login.component.scss"],
 })
 export class LoginComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private userService: UsersService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private translate: TranslationService
   ) {}
   userloginForm: FormGroup;
   userSubscription: Subscription;
@@ -27,7 +29,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   createForm() {
     this.userloginForm = this.fb.group({
       email: ["", [Validators.required, Validators.email]],
-      password: ["", [Validators.required]]
+      password: ["", [Validators.required]],
     });
   }
 
@@ -35,7 +37,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     if (this.userloginForm.valid) {
       let userdata: UserLogin = this.userloginForm.value;
       this.userSubscription = this.userService.login(userdata).subscribe(
-        async data => {
+        async (data) => {
           sessionStorage.setItem("token", data["token"]);
           sessionStorage.setItem("user", JSON.stringify(data));
           await AppAlert.showSuccess("logged in succefuly", "", 1500);
@@ -49,11 +51,10 @@ export class LoginComponent implements OnInit, OnDestroy {
         async (err: HttpErrorResponse) => {
           console.log(err);
           if (err.error["code"] === "NODATA") {
-            await AppAlert.showToastWarning(
-              "no data found for this user please enter a valid email",
-              "",
-              2000
+            let trans = await this.translate.getTranslation(
+              "messages.no-user-data"
             );
+            await AppAlert.showToastWarning(trans, "", 2000);
           } else if (err.error["code"] === "EMAIL_PASSWORD") {
             await AppAlert.showToastWarning(
               "please check email or password",

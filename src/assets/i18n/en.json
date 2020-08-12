@@ -55,8 +55,11 @@
     "observable": "Realtime Data",
     "profile": "Profile",
     "chat": "Chat",
-    "grid":"Grid CSS3",
+    "grid": "Grid CSS3",
     "create-password": "Create password",
     "register": "Register"
+  },
+  "messages": {
+    "no-user-data": "no data found for this email please retry"
   }
 }

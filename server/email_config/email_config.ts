@@ -1,4 +1,4 @@
-import nodemail from "nodemailer";
+import * as nodemail from "nodemailer";
 
 //////////////
 

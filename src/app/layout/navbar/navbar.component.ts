@@ -10,7 +10,7 @@ declare var $: any;
 @Component({
   selector: "app-navbar",
   templateUrl: "./navbar.component.html",
-  styleUrls: ["./navbar.component.scss"]
+  styleUrls: ["./navbar.component.scss"],
 })
 export class NavbarComponent implements OnInit {
   navRoles = false;
@@ -31,12 +31,12 @@ export class NavbarComponent implements OnInit {
     ////////////////////////////////////////////////////////////////////////////
     this.configAppService
       .getConfig()
-      .then(configData => {
+      .then((configData) => {
         // console.log("App Init well thanks");
         // console.log(configData);
         this.appConfig = configData;
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
   }
@@ -48,6 +48,7 @@ export class NavbarComponent implements OnInit {
     ///// << Change the direction of the page >> /////
     if (lang === "ar") {
       this.translation.setDefaultLang(lang);
+      localStorage.setItem("app-lang", "ar");
       this.dateAdapter.setLocale("ar");
       this.translate.setDefaultLang(lang);
       this.translate.use(lang);
@@ -63,6 +64,7 @@ export class NavbarComponent implements OnInit {
       this.translation.setDefaultLang(lang);
       this.translate.setDefaultLang(lang);
       this.translate.use(lang);
+      localStorage.setItem("app-lang", "en");
       this.dateAdapter.setLocale("en");
       // this.document.getElementById("theme").setAttribute("href","assets/bootstrap/css/bootstrap.min.css");
       this.document.getElementById("theme").setAttribute("href", "");

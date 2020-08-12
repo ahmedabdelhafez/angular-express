@@ -1,4 +1,4 @@
-import express from "express";
+import * as express from "express";
 import { usersRouter } from "./users-routes";
 import { chatRouter } from "./chat-routes";
 

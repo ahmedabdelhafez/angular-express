@@ -2,11 +2,12 @@ import { Injectable } from "@angular/core";
 // import { Socket } from "ngx-socket-io";
 import { Observable, Subject } from "rxjs";
 import * as io from "socket.io-client";
+import { environment } from "../../environments/environment";
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class ChatService {
-  private url = "http://localhost:4000";
+  private url = environment.chatServer.url;
   private socket: SocketIOClient.Socket;
   userMessage: Subject<any> = new Subject<any>();
 
@@ -23,8 +24,8 @@ export class ChatService {
    * @returns void
    */
   public getMessages() {
-    return Observable.create(observer => {
-      this.socket.on("client-message", msg => {
+    return Observable.create((observer) => {
+      this.socket.on("client-message", (msg) => {
         observer.next(msg);
       });
     });
@@ -35,16 +36,16 @@ export class ChatService {
    * @returns void
    */
   public afterConnect() {
-    return Observable.create(observer => {
-      this.socket.on("after-connect", msg => {
+    return Observable.create((observer) => {
+      this.socket.on("after-connect", (msg) => {
         observer.next(msg);
       });
     });
   }
 
   public afterDisconnect() {
-    return Observable.create(observer => {
-      this.socket.on("after-disconnect", msg => {
+    return Observable.create((observer) => {
+      this.socket.on("after-disconnect", (msg) => {
         observer.next(msg);
       });
     });
@@ -55,8 +56,8 @@ export class ChatService {
   }
 
   getWrittingStatus() {
-    return Observable.create(observer => {
-      this.socket.on("writing-user-text", msg => {
+    return Observable.create((observer) => {
+      this.socket.on("writing-user-text", (msg) => {
         observer.next(msg);
       });
     });
