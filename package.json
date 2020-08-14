@@ -43,6 +43,8 @@
     "@types/mongoose": "^5.7.36",
     "@types/morgan": "^1.9.1",
     "@types/nodemailer": "^6.4.0",
+    "@types/passport": "^1.0.4",
+    "@types/passport-jwt": "^3.0.3",
     "@types/socket.io": "^2.1.11",
     "@types/socket.io-client": "^1.4.33",
     "@uppy/companion": "^1.6.0",
