@@ -9,7 +9,7 @@ import { BootstrapngxModule } from "../shared/bootstrapngx.module";
 import { ChatComponent } from "./chat/chat.component";
 import { RegisterComponent } from "./register/register.component";
 import { CreatePasswordComponent } from "./create-password/create-password.component";
-import { LoginComponent } from "../login/login.component";
+import { LoginComponent } from './login/login.component';
 
 // const route: Routes = [
 //   { path: '', component: TeststyleComponent }

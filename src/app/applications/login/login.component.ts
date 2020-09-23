@@ -1,12 +1,13 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Router } from "@angular/router";
-import { UsersService } from "../services/users.service";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Subscription } from "rxjs";
-import { UserLogin } from "../model/UserLogin.interface";
-import { AppAlert } from "../shared/util/AppAlert";
-import { HttpErrorResponse } from "@angular/common/http";
-import { TranslationService } from "../core/translation.service";
+import { HttpErrorResponse } from '@angular/common/http';
+import { TranslationService } from 'src/app/core/translation.service';
+import { UserLogin } from 'src/app/model/UserLogin.interface';
+import { UsersService } from 'src/app/services/users.service';
+import { AppAlert } from 'src/app/shared/util/AppAlert';
+
 
 @Component({
   selector: "app-login",
@@ -33,7 +34,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     });
   }
 
-  login() {
+  doLogin() {
     if (this.userloginForm.valid) {
       let userdata: UserLogin = this.userloginForm.value;
       this.userSubscription = this.userService.login(userdata).subscribe(

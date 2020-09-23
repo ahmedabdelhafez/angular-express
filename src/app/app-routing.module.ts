@@ -1,6 +1,5 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
-import { LoginComponent } from "./login/login.component";
 import { TeststyleComponent } from "./applications/teststyle/teststyle.component";
 import { DashboardComponent } from "./applications/dashboard/dashboard.component";
 import { ErrorpageComponent } from "./applications/errorpage/errorpage.component";
@@ -9,6 +8,7 @@ import { RegisterComponent } from "./applications/register/register.component";
 import { CanactiveateGuard } from "./security/guard/canactiveate.guard";
 import { ChekRolesGuard } from "./security/guard/chek-roles.guard";
 import { CreatePasswordComponent } from "./applications/create-password/create-password.component";
+import { LoginComponent } from './applications/login/login.component';
 
 const routes: Routes = [
   {

@@ -15,7 +15,6 @@ import {
   NgxUiLoaderRouterModule,
   NgxUiLoaderHttpModule
 } from "ngx-ui-loader";
-import { LoginComponent } from "./login/login.component";
 import { ApplicationsModule } from "./applications/applications.module";
 import { DashboardComponent } from "./applications/dashboard/dashboard.component";
 import { ComponentModule } from "./shared/components/components.module";

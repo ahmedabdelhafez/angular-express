@@ -1,7 +1,7 @@
 {
   "/api/*": {
     "_comment": "target: is the working backend Server URL",
-    "target": "http://localhost:4000",
+    "target": "http://localhost:4100",
     "secure": false,
     "logLevel": "debug"
   }

@@ -1,0 +1,184 @@
+<!-- <div class="container">
+  <div class="main-login-cont">
+    <div class="main-header">
+      <img
+        [src]="'../../../assets/icons/navbar-icons/sec.svg'"
+        alt=""
+        width="64"
+        height="64"
+        [ngStyle]="{ borderRadius: '50%', backgroundColor: 'seagreen' }"
+      />
+    </div>
+    <form [formGroup]="userloginForm" (ngSubmit)="login()">
+      <div class="main-body">
+        <mat-form-field [ngStyle]="{ width: '100%' }">
+          <mat-label>Email</mat-label>
+          <input
+            matInput
+            placeholder="email"
+            type="text"
+            autocomplete="off"
+            name="email"
+            id="email"
+            formControlName="email"
+            autofocus
+          />
+
+          <mat-error
+            *ngIf="
+              userloginForm.get('email').invalid &&
+              (userloginForm.get('email').touched ||
+                userloginForm.get('email').dirty)
+            "
+          >
+            <p
+              class="text-danger"
+              *ngIf="userloginForm.get('email').hasError('required')"
+            >
+              email field is required
+            </p>
+            <p
+              class="text-danger"
+              *ngIf="userloginForm.get('email').hasError('email')"
+            >
+              please login with valid email
+            </p>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field [ngStyle]="{ width: '100%' }">
+          <mat-label>Password</mat-label>
+          <input
+            matInput
+            placeholder="password"
+            type="password"
+            autocomplete="off"
+            name="password"
+            formControlName="password"
+            id="password"
+          />
+
+          <mat-error
+            *ngIf="
+              userloginForm.get('password').invalid &&
+              (userloginForm.get('password').touched ||
+                userloginForm.get('password').dirty)
+            "
+          >
+            <p
+              class="text-danger"
+              *ngIf="userloginForm.get('password').hasError('required')"
+            >
+              email field is required
+            </p>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="action-footer">
+        <button
+          type="submit"
+          mat-raised-button
+          class="input-item1 mr-2"
+          [ngStyle]="{ width: '100px' }"
+          [disabled]="userloginForm.invalid"
+        >
+          Login
+        </button>
+        <button
+          mat-raised-button
+          class="input-item1"
+          [ngStyle]="{ width: '100px' }"
+        >
+          Register
+        </button>
+      </div>
+    </form>
+    <div class="icon-footer">
+      <i class="fa fa-facebook" aria-hidden="true"></i>
+      <i class="fa fa-twitter" aria-hidden="true"></i>
+      <i class="fa fa-google-plus" aria-hidden="true"></i>
+    </div>
+
+    <div class="last-footer"></div>
+  </div>
+</div> -->
+
+<div class="login-page-wrapper">
+  <form [formGroup]="userloginForm" (ngSubmit)="doLogin()">
+    <div class="login-container">
+      <div
+        class="row d-flex flex-row justify-content-center align-items-center"
+      >
+        <img
+          src="assets/icons/navbar-icons/sec.svg"
+          alt="sec"
+          class="img-rounded rounded-circle w-25 h-25 img-border"
+        />
+      </div>
+      <div class="login-control-items-wrapper">
+        <div class="login-control-items">
+          <mat-form-field>
+            <input
+              matInput
+              type="email"
+              placeholder="email"
+              formControlName="email"
+            />
+            <mat-error
+              *ngIf="
+                userloginForm.get('email').invalid &&
+                (userloginForm.get('email').touched ||
+                  userloginForm.get('email').dirty)
+              "
+            >
+              <p
+                class="text-danger"
+                *ngIf="userloginForm.get('email').hasError('required')"
+              >
+                email field is required
+              </p>
+              <p
+                class="text-danger"
+                *ngIf="userloginForm.get('email').hasError('email')"
+              >
+                please login with valid email
+              </p>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input
+              matInput
+              type="password"
+              placeholder="password"
+              formControlName="password"
+            />
+            <mat-error
+              *ngIf="
+                userloginForm.get('password').invalid &&
+                (userloginForm.get('password').touched ||
+                  userloginForm.get('password').dirty)
+              "
+            >
+              <p
+                class="text-danger"
+                *ngIf="userloginForm.get('password').hasError('required')"
+              >
+                password field is required
+              </p>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="login-action-items">
+        <div class="action-items">
+          <button mat-raised-button class="btn-color" type="submit">
+            Login
+          </button>
+          <button mat-raised-button class="btn-color" routerLink="/register">
+            Register
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
