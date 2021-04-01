@@ -3,19 +3,16 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve ",
+    "start": "ng serve -o",
     "build": "ng build --prod",
     "build:client": "ng build --prod",
     "dev:server": "npm-run-all tsc:server copy nodemon",
-    "prod:server": "npm-run-all build tsc:server copy nodemon",
+    "prod:server": "npm-run-all build:client tsc:server copy nodemon",
     "tsc": "tsc -w -project tsconfig.server.json",
     "nodemon": "nodemon dist/server/server.js",
     "tsc:server": "tsc --project tsconfig.server.json",
     "copy": "copyfiles server/** dist/ -e server/**/*.ts",
-    "clean": "rimraf dist",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e"
+    "clean": "rimraf dist"
   },
   "private": true,
   "dependencies": {

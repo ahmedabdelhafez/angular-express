@@ -1,18 +1,23 @@
 import { chatEvents } from "./socket-events.enum";
 import { chatLogModel } from "../model/chatLogModel";
-export const socketEvents = (io) => {
+import { Server, Socket } from "socket.io";
+export const socketEvents = (serverIo:Server) => {
   /** Create the socket connection */
   const connections = [];
+  let clientRef: Socket;
 
-  io.sockets.on(chatEvents.connect, (cl) => {
-    let client = cl;
+  serverIo.sockets.on(chatEvents.connect, (cl) => {
+    clientRef = cl;
     console.log("client connected well and session pushed to array");
     // << send session data to connected client >> //
-    connections.push(client);
-    client.emit(chatEvents.afterConnect, { socketId: client.id, active: true });
+    connections.push(clientRef);
+    clientRef.emit(chatEvents.afterConnect, {
+      socketId: clientRef.id,
+      active: true,
+    });
     // console.log(connections[0].id);
     // << listin to new message from client and redirect it to other connected clients >> //
-    client.on(chatEvents.newMessage, (messageObj) => {
+    clientRef.on(chatEvents.newMessage, (messageObj) => {
       // << Log message to database >> //
       let { name, message, email } = messageObj;
 
@@ -20,7 +25,7 @@ export const socketEvents = (io) => {
         name: name,
         email: email,
         message: message,
-        socketId: client.id,
+        socketId: clientRef.id,
         createDate: new Date().toLocaleString(),
       });
       chatModel
@@ -33,11 +38,11 @@ export const socketEvents = (io) => {
         });
 
       // resend the message to all users include: [sender]
-      io.emit(chatEvents.clientMessage, {
+      serverIo.emit(chatEvents.clientMessage, {
         name: messageObj["name"],
         email: messageObj["email"],
         message: messageObj["message"],
-        socketId: client.id,
+        socketId: clientRef.id,
         createDate: new Date().toLocaleString(),
       });
       ////////////// << send to all except the [sender] >> ///
@@ -46,22 +51,22 @@ export const socketEvents = (io) => {
     });
 
     // << send event to all connected users when the current user write [expect: currnet user] >> //
-    client.on(chatEvents.writing, (userText) => {
-      client.broadcast.emit("writing-user-text", userText);
+    clientRef.on(chatEvents.writing, (userText) => {
+      clientRef.broadcast.emit("writing-user-text", userText);
     });
 
-    client.on(chatEvents.disconnect, () => {
-      client.emit(chatEvents.afterDisconnect, {
-        socketId: client.id,
+    clientRef.on(chatEvents.disconnect, () => {
+      clientRef.emit(chatEvents.afterDisconnect, {
+        socketId: clientRef.id,
         active: false,
       });
       console.log("socket disconnect well");
     });
   });
 
-  io.on(chatEvents.disconnect, () => {
-    this.client.emit(chatEvents.afterDisconnect, {
-      socketId: this.client.id,
+  serverIo.on(chatEvents.disconnect, () => {
+    clientRef.emit(chatEvents.afterDisconnect, {
+      socketId: clientRef.client.id,
       active: false,
     });
   });
